@@ -1,29 +1,67 @@
 //BMS_SLAVE CODE
+//BMS Slave checks the voltage and temps of the connected parallel cells.
+//    This communicates with the master device through a serial com loop
+//    and an low true alarm bus. This will ensure operation for all faults.
+//
+///////////////////////////////////////////////////////////////////////////
+//
+//                            ___________
+//                           |           |
+//                       VCC | 1      14 | GND
+//           Alarm 0 <-  PB0 | 2      13 | PA0 <-  Voltage
+//           Alarm 1 <-  PB1 | 3      12 | PA1  -> Relay 
+//           Alarm 3 <-  PB3 | 4      11 | PA2  -> TX
+//           Alarm 2 <-  PB2 | 5      10 | PA3 <-  RX
+//              LED  <-  PA7 | 6      9  | PA4 <-> SCL I2C
+//           SDA I2C <-> PA6 | 7      8  | PA5  -  NC/GND
+//                           |___________|
+//
+//  To use PB3 as an output, RSTDISBL = 0; (disables reset pin)
+
+
+
 //init vars
+//Thresholds
 byte OV_thresh = 11110111;
 byte UV_thresh = 10010100;
 byte CV_thresh = 11110100;
 byte LV_thresh = 10011111;
-byte
-int led = ;
-int vPin = ;
-int tPin1 = ;
-int tPin2 = ;
-int RELAY = ;
+byte OT_thresh = 11111111;
+byte SHUTDOWN  = 01110110;
+
+//Pin Definitions
+int pin_A0 = 2;
+int pin_A1 = 3;
+int pin_A2 = 5;
+int pin_A3 = 4;
+int pin_LED = 6;
+int pin_SDA = 7;
+int pin_SCL = 9;
+int pin_RX = 10;
+int pin_TX = 11;
+int pin_Relay = 12;
+int pin_V = 13;
+
+//Pin Setup
+pinMode(pin_A0, OUTPUT);
+pinMode(pin_A1, OUTPUT);
+pinMode(pin_A2, OUTPUT);
+pinMode(pin_A3, OUTPUT);
+pinMode(pin_LED, OUTPUT);
+//SDA? - set up as I2C pin? or will be automatically when using I2C function
+//SCL? - set up as I2C pin?
+pinMode(pin_RX, INPUT);
+pinMode(pin_TX, OUTPUT);
+pinMode(pin_Relay, OUTPUT);
+pinMode(pin_V, INPUT);
+
 //setup code
 void setup() 
 {
   boolean normVol = false;
   boolean normTemp = false;
-  //initialize port direction DDRB DDRA
-  DDRA = ;
-  DDRB = 00001111;
-//  pinMode(led, OUTPUT);
-//  pinMode(alarm0, OUTPUT);
-//  pinMode(alarm1, OUTPUT);
-//  pinMode(alarm3, OUTPUT);
-//  pinMode(alarm4, OUTPUT);
-//  pinMode(vPin, INPUT);
+
+  
   //check avgVoltage (needs to be fast)
   //check maxTemp (needs to be fast) both less than .1s?
   byte alarm = checkStatus();
@@ -70,8 +108,8 @@ void loop()
 //functions
 int16_t getVoltage(vPin,nMeas)
 {
-  int16_t voltageTotal
-  int16_t voltageAvg
+  int16_t voltageTotal = 0;
+  int16_t voltageAvg = 0;
   for(i=0;i<nMeas;i++)
   {
     voltageTotal = voltageTotal + analogRead(vPin);
