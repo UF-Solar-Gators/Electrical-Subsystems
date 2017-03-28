@@ -47,17 +47,17 @@ void setup()
   Serial.begin(9600);
   
 //Pin Setup
-pinMode(pin_A0, OUTPUT);
-pinMode(pin_A1, OUTPUT);
-pinMode(pin_A2, OUTPUT);
-pinMode(pin_A3, OUTPUT);
-pinMode(pin_LED, OUTPUT);
-//SDA? - set up as I2C pin? or will be automatically when using I2C function
-//SCL? - set up as I2C pin?
-pinMode(pin_RX, INPUT);
-pinMode(pin_TX, OUTPUT);
-pinMode(pin_Relay, OUTPUT);
-pinMode(pin_V, INPUT);
+    pinMode(pin_A0, OUTPUT);
+    pinMode(pin_A1, OUTPUT);
+    pinMode(pin_A2, OUTPUT);
+    pinMode(pin_A3, OUTPUT);
+    pinMode(pin_LED, OUTPUT);
+    //SDA? - set up as I2C pin? or will be automatically when using I2C function
+    //SCL? - set up as I2C pin?
+    pinMode(pin_RX, INPUT);
+    pinMode(pin_TX, OUTPUT);
+    pinMode(pin_Relay, OUTPUT);
+    pinMode(pin_V, INPUT);
 
 
 
@@ -81,18 +81,19 @@ pinMode(pin_V, INPUT);
   //  continue to loop
   //else
   //  blink led until power down
-     else while(true){
-        digitalWrite(led,HIGH);
-        delay(500);
-        digitalWrite(LOW);
-        delay(500);
-     }
+    
      //Don't know how long you want it to blink
 }
 
 //body code
 void loop()
 {
+   while(true){
+        digitalWrite(led,HIGH);
+        delay(500);
+        digitalWrite(LOW);
+        delay(500);
+     }
   //check avgVoltage
   //check avgTemp, maxTemp
   //compare to thresholds (function that returns alarm array? bool array?)
