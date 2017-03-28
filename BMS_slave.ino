@@ -42,6 +42,10 @@ int pin_TX = 11;
 int pin_Relay = 12;
 int pin_V = 13;
 
+void setup()
+{
+  Serial.begin(9600);
+  
 //Pin Setup
 pinMode(pin_A0, OUTPUT);
 pinMode(pin_A1, OUTPUT);
@@ -55,9 +59,10 @@ pinMode(pin_TX, OUTPUT);
 pinMode(pin_Relay, OUTPUT);
 pinMode(pin_V, INPUT);
 
-//setup code
-void setup() 
-{
+
+
+
+
   boolean normVol = false;
   boolean normTemp = false;
 
