@@ -16,6 +16,7 @@ void setup()
   boolean normVol = false;
   boolean normTemp = false;
   //initialize port direction DDRB DDRA
+  //set clock for 4 MHz
   DDRA = ;
   DDRB = 00001111;
 //  pinMode(led, OUTPUT);
