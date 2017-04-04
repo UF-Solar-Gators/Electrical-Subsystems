@@ -1,6 +1,8 @@
 //Motor Controller Code
 //init vars
 
+//#define F_CPU 4000000
+//#define BAUD 9600
 //#ifndef cbi
 //#define cbi(sfr, bit) (_SFR_BYTE(sfr) &= ~_BV(bit))
 //#endif
